@@ -2,6 +2,7 @@
 namespace efrogg\Db\Adapters\Pdo;
 
 
+use efrogg\Db\Adapters\DbAdapter;
 use efrogg\Db\Adapters\DbResultAdapter;
 
 class PdoDbResult implements DbResultAdapter {
@@ -15,14 +16,14 @@ class PdoDbResult implements DbResultAdapter {
         $this->statement = $statement;
     }
 
-    public function fetch()
+    public function fetch($type=self::FETCH_TYPE_ASSOC)
     {
-        return $this -> statement -> fetch();
+        return $this -> statement -> fetch($this->getFetchStyle($type));
     }
 
-    public function fetchAll()
+    public function fetchAll($type=self::FETCH_TYPE_ASSOC)
     {
-        return $this -> statement -> fetchAll(\PDO::FETCH_ASSOC);
+        return $this -> statement -> fetchAll($this->getFetchStyle($type));
     }
 
     public function fetchColumn($column = 0)
@@ -80,5 +81,16 @@ class PdoDbResult implements DbResultAdapter {
     {
         $info = $this -> statement->errorInfo();
         return $info[2];
+    }
+
+    private function getFetchStyle($type)
+    {
+        if($type == DbResultAdapter::FETCH_TYPE_ASSOC) {
+            return \PDO::FETCH_ASSOC;
+        } elseif($type == DbResultAdapter::FETCH_TYPE_ARRAY) {
+            return \PDO::FETCH_NUM;
+        } else {
+            return \PDO::FETCH_BOTH;
+        }
     }
 }

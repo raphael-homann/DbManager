@@ -41,4 +41,15 @@ abstract class Migration
     {
         return false;
     }
+
+    /**
+     * @param $tableName
+     * @return Table
+     */
+    protected function table($tableName)
+    {
+        $table = new Table($tableName);
+        $table->setDb($this->db);
+        return $table;
+    }
 }

@@ -32,16 +32,17 @@ class AutoInstallMigration extends Migration
 
     public function up()
     {
-        $sql = "CREATE TABLE ".$this->tableName." (
-            `id_migration` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-            `migration_name` VARCHAR(512) NOT NULL ,
-            `batch` SMALLINT UNSIGNED NOT NULL ,
-            INDEX `batch` (`batch`),
-            PRIMARY KEY `id_migration` (`id_migration`),
-            UNIQUE `migration_name` (`migration_name`)
-          )
-          ENGINE = InnoDB;";
-        $executed = $this->db->execute($sql);
+        $this
+            -> table($this->tableName)
+            -> create("CREATE TABLE ".$this->tableName." (
+                `id_migration` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+                `migration_name` VARCHAR(512) NOT NULL ,
+                `batch` SMALLINT UNSIGNED NOT NULL ,
+                INDEX `batch` (`batch`),
+                PRIMARY KEY `id_migration` (`id_migration`),
+                UNIQUE `migration_name` (`migration_name`)
+              )
+              ENGINE = InnoDB;");
 //        if(!$executed->isValid()) {
 //            var_dump($executed->getErrorMessage());
 //        }

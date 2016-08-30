@@ -2,15 +2,20 @@
 namespace efrogg\Db\Adapters;
 
 interface DbResultAdapter {
+
+    const FETCH_TYPE_ASSOC = "FETCH_ASSOC";
+    const FETCH_TYPE_ARRAY = "FETCH_ARRAY";
+    const FETCH_TYPE_BOTH = "FETCH_BOTH";
     /**
      * @return bool
      */
     public function isValid();
 
     /**
-     * @return array
+     * @param string $type
+     * @return array|false
      */
-    public function fetch();
+    public function fetch($type=self::FETCH_TYPE_ASSOC);
 
     /**
      * @param null $class_name
@@ -22,7 +27,7 @@ interface DbResultAdapter {
     /**
      * @return array[]
      */
-    public function fetchAll();
+    public function fetchAll($type=self::FETCH_TYPE_ASSOC);
 
     /**
      * @param $column_name

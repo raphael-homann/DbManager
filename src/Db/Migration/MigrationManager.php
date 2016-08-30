@@ -143,16 +143,27 @@ class MigrationManager
 
     private function saveMigration(Migration $migration, $batchNumber)
     {
+        // persistence en BDD
         $query = $this->db->execute("INSERT INTO ".$this->migrationTableName." (migration_name,batch) VALUES (?,?)",array($migration->getName(),$batchNumber));
         if(!$query->isValid()) {
             var_dump($query->getErrorMessage());
         }
-        $this->migrationList[]=$migration->getName();               // maintient de l'indexs
+
+        // maintient de l'index
+        $this->migrationList[]=$migration->getName();
+
     }
     private function removeMigration(Migration $migration)
     {
+        // persistence en BDD
         $sql = "DELETE FROM ".$this->migrationTableName." WHERE migration_name = ?";
         $query = $this->db->execute($sql,array($migration->getName()));
+
+        // maintient de l'index
+        $pos = array_search($migration->getName(),$this->getExistingMigrations());
+        if(false !== $pos) {
+            unset($this->migrationList[$pos]);
+        }
 
         if(!$query->isValid()) {
             var_dump($query->getErrorMessage());

@@ -15,15 +15,21 @@ class MysqlDbResult implements DbResultAdapter {
         $this->resource = $resource;
     }
 
-    public function fetch()
+    public function fetch($type=self::FETCH_TYPE_ASSOC)
     {
-        return $this -> resource ? mysql_fetch_assoc($this -> resource) : false;
+        if($type == self::FETCH_TYPE_ASSOC) {
+            return $this -> resource ? mysql_fetch_assoc($this -> resource) : false;
+        } elseif($type == self::FETCH_TYPE_ARRAY) {
+            return $this -> resource ? mysql_fetch_array($this -> resource,MYSQL_NUM) : false;
+        } else {
+            return $this -> resource ? mysql_fetch_array($this -> resource) : false;
+        }
     }
 
-    public function fetchAll()
+    public function fetchAll($type=self::FETCH_TYPE_ASSOC)
     {
         $data = array();
-        while($line = mysql_fetch_assoc($this -> resource)) {
+        while($line = $this -> fetch($type)) {
             $data[]=$line;
         }
         return $data;
