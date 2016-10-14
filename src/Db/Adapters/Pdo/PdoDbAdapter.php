@@ -4,14 +4,18 @@ namespace efrogg\Db\Adapters\Pdo;
 
 use efrogg\Db\Adapters\DbAdapter;
 use efrogg\Db\Adapters\DbResultAdapter;
+use efrogg\Db\Adapters\AbstractDbAdapter;
 use efrogg\Db\Exception\DbException;
 use efrogg\Db\Adapters\Mysql\MysqlDbResult;
 use efrogg\Db\Adapters\Pdo\PdoDbResult;
 
-class PdoDbAdapter implements DbAdapter{
+class PdoDbAdapter extends AbstractDbAdapter{
     /** @var  \PDO */
     protected $db;
-    protected $throws_exceptions = false;
+    /** @var  PdoDbResult */
+    protected $lastResult;
+    /** @var  \PDOStatement */
+    protected $lastStmt;
 
 
     /**
@@ -35,10 +39,13 @@ class PdoDbAdapter implements DbAdapter{
         $stmt->execute($params);
 
         $result = new PdoDbResult($stmt);
+
         if($this->throws_exceptions && !$result->isValid()) {
 //            var_dump($result->getErrorMessage(),$result->getErrorCode());
             throw new DbException($result->getErrorMessage(),$result->getErrorCode());
         }
+        $this->lastResult = $result;
+        $this->lastStmt = $stmt;
         return $result;
     }
 
@@ -55,7 +62,7 @@ class PdoDbAdapter implements DbAdapter{
      */
     public function getInsertId()
     {
-        return 0; //TODO
+        return $this->db->lastInsertId();
     }
 
     /**
@@ -63,11 +70,7 @@ class PdoDbAdapter implements DbAdapter{
      */
     public function getAffectedRows()
     {
-        return 0;//TODO
+        return $this->lastStmt->rowCount();
     }
 
-    public function throwsExceptions($throws = true)
-    {
-        $this->throws_exceptions = $throws;
-    }
 }

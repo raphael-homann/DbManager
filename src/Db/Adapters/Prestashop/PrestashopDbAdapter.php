@@ -6,8 +6,9 @@ use efrogg\Db\Adapters\DbAdapter;
 use efrogg\Db\Adapters\DbResultAdapter;
 use efrogg\Db\Adapters\Mysql\MysqlDbResult;
 use efrogg\Db\Adapters\Pdo\PdoDbResult;
+use efrogg\Db\Adapters\AbstractDbAdapter;
 
-class PrestashopDbAdapter implements DbAdapter{
+class PrestashopDbAdapter extends AbstractDbAdapter{
     /** @var  \Db */
     protected $db;
 
@@ -62,8 +63,4 @@ class PrestashopDbAdapter implements DbAdapter{
         $this->db->Affected_Rows();
     }
 
-    public function throwsExceptions()
-    {
-        // TODO: Implement throwsExceptions() method.
-    }
 }

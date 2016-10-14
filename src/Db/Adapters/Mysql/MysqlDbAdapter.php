@@ -6,8 +6,9 @@ use efrogg\Db\Adapters\DbAdapter;
 use efrogg\Db\Adapters\DbResultAdapter;
 use efrogg\Db\Adapters\Mysql\MysqlDbResult;
 use efrogg\Db\Adapters\Pdo\PdoDbResult;
+use efrogg\Db\Adapters\AbstractDbAdapter;
 
-class MysqlDbAdapter implements DbAdapter{
+class MysqlDbAdapter extends AbstractDbAdapter{
     /** @var  resource */
     protected $db;
 
@@ -55,4 +56,5 @@ class MysqlDbAdapter implements DbAdapter{
     {
         return mysql_affected_rows($this->db);
     }
+
 }

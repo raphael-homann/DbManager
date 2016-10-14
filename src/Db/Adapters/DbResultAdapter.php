@@ -25,7 +25,8 @@ interface DbResultAdapter {
     public function fetchObject($class_name = null, array $params = null);
 
     /**
-     * @return array[]
+     * @param string $type
+     * @return \array[]
      */
     public function fetchAll($type=self::FETCH_TYPE_ASSOC);
 
@@ -37,7 +38,13 @@ interface DbResultAdapter {
 
     public function fetchAllObject($class_name = null, array $params = null);
 
+    /**
+     * @return int
+     */
     public function getErrorCode();
 
+    /**
+     * @return String
+     */
     public function getErrorMessage();
 }
