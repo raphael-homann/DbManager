@@ -4,11 +4,10 @@ namespace efrogg\Db\Adapters\Mysql;
 
 use efrogg\Db\Adapters\DbAdapter;
 use efrogg\Db\Adapters\DbResultAdapter;
-use efrogg\Db\Adapters\Mysql\MysqlDbResult;
-use efrogg\Db\Adapters\Pdo\PdoDbResult;
-use efrogg\Db\Adapters\AbstractDbAdapter;
+use efrogg\Db\Tools;
+use efrogg\Db\Tools\DbTools;
 
-class MysqlDbAdapter extends AbstractDbAdapter{
+class MysqlDbAdapter implements DbAdapter{
     /** @var  resource */
     protected $db;
 
@@ -30,7 +29,10 @@ class MysqlDbAdapter extends AbstractDbAdapter{
      */
     public function execute($query, $params = array(), $forceMaster = false)
     {
-        return new MysqlDbResult(mysql_query($query,$this->db));
+        if($query instanceof Tools\DbQueryBuilder) $sql = $query->buildQuery();
+        else $sql = DbTools::protegeRequete($query,$params);
+
+        return new MysqlDbResult(mysql_query($sql,$this->db));
     }
 
     /**
@@ -57,4 +59,13 @@ class MysqlDbAdapter extends AbstractDbAdapter{
         return mysql_affected_rows($this->db);
     }
 
+    public function throwsExceptions($throws = true)
+    {
+        // TODO: Implement throwsExceptions() method.
+    }
+
+    public function getName()
+    {
+        // TODO: Implement getName() method.
+    }
 }

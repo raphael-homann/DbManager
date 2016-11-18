@@ -6,11 +6,14 @@ use efrogg\Db\Adapters\DbAdapter;
 use efrogg\Db\Adapters\DbResultAdapter;
 use efrogg\Db\Adapters\Mysql\MysqlDbResult;
 use efrogg\Db\Adapters\Pdo\PdoDbResult;
-use efrogg\Db\Adapters\AbstractDbAdapter;
+use efrogg\Db\Tools\DbTools;
 
-class PrestashopDbAdapter extends AbstractDbAdapter{
+class PrestashopDbAdapter implements DbAdapter{
     /** @var  \Db */
     protected $db;
+
+    /** @var  bool */
+    protected $throws_exception = false;
 
 
     /**
@@ -27,13 +30,15 @@ class PrestashopDbAdapter extends AbstractDbAdapter{
      * @param array $params
      * @param bool $forceMaster
      * @return DbResultAdapter
+     * @throws \Exception
      */
     public function execute($query, $params = array(), $forceMaster = false)
     {
+        $sql = DbTools::protegeRequete($query,$params);
         if($this->db instanceof \MySQL) {
-            return new MysqlDbResult($this->db -> query($query));
+            return new MysqlDbResult($this->db -> query($sql));
         } elseif($this->db instanceof \DbPDOCore) {
-            return new PdoDbResult($this->db -> query($query));
+            return new PdoDbResult($this->db -> query($sql));
         } else {
             throw new \Exception("datapase type unknown : ".get_class($this->db));
         }
@@ -63,4 +68,13 @@ class PrestashopDbAdapter extends AbstractDbAdapter{
         $this->db->Affected_Rows();
     }
 
+    public function throwsExceptions($throws = true)
+    {
+        $this->throws_exception = $throws;
+    }
+
+    public function getName()
+    {
+        // TODO: Implement getName() method.
+    }
 }

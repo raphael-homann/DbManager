@@ -27,10 +27,9 @@ interface DbAdapter {
      */
     public function getAffectedRows();
 
-
     public function throwsExceptions($throws = true);
 
-    public function getName(): string;
+    public function getName();
 
 
 }
