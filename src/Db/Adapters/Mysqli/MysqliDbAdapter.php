@@ -1,5 +1,5 @@
 <?php
-namespace efrogg\Db\Adapters\Mysqli;
+namespace Efrogg\Db\Adapters\Mysqli;
 
 
 use efrogg\Db\Adapters\AbstractDbAdapter;
@@ -16,7 +16,7 @@ class MysqliDbAdapter extends AbstractDbAdapter  {
     }
     public function execute($query,$params=array(), $forceMaster = false)
     {
-        // protection des paramètres
+        // protection des paramï¿½tres
         $req = \MysqlManager::protegeRequete($query, $params);
 
         // execution de la requete

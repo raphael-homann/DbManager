@@ -6,7 +6,7 @@
  * Time: 10:09
  */
 
-namespace efrogg\Db\Migration;
+namespace Efrogg\Db\Migration;
 
 
 class Key

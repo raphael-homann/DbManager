@@ -6,7 +6,7 @@
  * Time: 09:58
  */
 
-namespace efrogg\Db\Migration;
+namespace Efrogg\Db\Migration;
 
 
 class AutoInstallMigration extends Migration

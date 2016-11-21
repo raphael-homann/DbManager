@@ -24,7 +24,7 @@
  * @link     https://github.com/iNem0o/PicORM
  */
 
-namespace efrogg\Db\Tools;
+namespace Efrogg\Db\Tools;
 
 /**
  * Class QueryBuilder

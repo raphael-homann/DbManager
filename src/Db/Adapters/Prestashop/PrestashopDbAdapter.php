@@ -1,6 +1,6 @@
 <?php
 
-namespace efrogg\Db\Adapters\Prestashop;
+namespace Efrogg\Db\Adapters\Prestashop;
 
 use efrogg\Db\Adapters\DbAdapter;
 use efrogg\Db\Adapters\DbResultAdapter;

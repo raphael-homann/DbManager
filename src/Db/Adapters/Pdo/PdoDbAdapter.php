@@ -1,6 +1,6 @@
 <?php
 
-namespace efrogg\Db\Adapters\Pdo;
+namespace Efrogg\Db\Adapters\Pdo;
 
 use efrogg\Db\Adapters\DbAdapter;
 use efrogg\Db\Adapters\DbResultAdapter;

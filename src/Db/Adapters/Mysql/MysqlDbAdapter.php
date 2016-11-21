@@ -1,6 +1,6 @@
 <?php
 
-namespace efrogg\Db\Adapters\Mysql;
+namespace Efrogg\Db\Adapters\Mysql;
 
 use efrogg\Db\Adapters\DbAdapter;
 use efrogg\Db\Adapters\DbResultAdapter;

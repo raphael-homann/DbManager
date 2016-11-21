@@ -6,7 +6,7 @@
  * Time: 17:19
  */
 
-namespace efrogg\Db\Adapters;
+namespace Efrogg\Db\Adapters;
 
 
 abstract class AbstractDbAdapter implements DbAdapter

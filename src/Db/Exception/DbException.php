@@ -6,7 +6,7 @@
  * Time: 11:57
  */
 
-namespace efrogg\Db\Exception;
+namespace Efrogg\Db\Exception;
 
 
 class DbException extends \Exception

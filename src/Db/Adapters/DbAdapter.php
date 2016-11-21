@@ -1,6 +1,6 @@
 <?php
 
-namespace efrogg\Db\Adapters;
+namespace Efrogg\Db\Adapters;
 
 
 interface DbAdapter {

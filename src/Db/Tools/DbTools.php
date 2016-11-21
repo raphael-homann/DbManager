@@ -6,7 +6,7 @@
  * Time: 17:57
  */
 
-namespace efrogg\Db\Tools;
+namespace Efrogg\Db\Tools;
 
 
 class DbTools

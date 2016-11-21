@@ -6,7 +6,7 @@
  * Time: 10:05
  */
 
-namespace efrogg\Db\Migration;
+namespace Efrogg\Db\Migration;
 
 
 class ColumnType

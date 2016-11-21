@@ -1,5 +1,5 @@
 <?php
-namespace efrogg\Db\Adapters\Mysqli;
+namespace Efrogg\Db\Adapters\Mysqli;
 
 
 use efrogg\Db\Adapters\DbResultAdapter;
