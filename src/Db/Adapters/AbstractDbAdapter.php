@@ -25,7 +25,7 @@ abstract class AbstractDbAdapter implements DbAdapter
     /**
      * @return string
      */
-    public function getName(): string
+    public function getName()
     {
         return $this->name;
     }
@@ -33,7 +33,7 @@ abstract class AbstractDbAdapter implements DbAdapter
     /**
      * @param string $name
      */
-    public function setName(string $name)
+    public function setName($name)
     {
         $this->name = $name;
     }
