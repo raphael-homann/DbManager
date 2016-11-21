@@ -26,6 +26,9 @@
 
 namespace Efrogg\Db\Query;
 
+use Efrogg\Db\Tools\DbTools;
+use Exception;
+
 /**
  * Class QueryBuilder
  * Allow you to easily build MySQL query using PHP Object
