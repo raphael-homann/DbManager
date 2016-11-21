@@ -16,7 +16,8 @@ class Key
 
     /**
      * Key constructor.
-     * @param $UNIQUE
+     * @param $key_type
+     * @internal param $UNIQUE
      */
     public function __construct($key_type)
     {

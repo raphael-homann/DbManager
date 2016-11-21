@@ -58,6 +58,7 @@ class ColumnType
      * @param string $default
      * @param string $complement
      * "VARCHAR",255,ColumnType::NOT_NULL,"DEFAULT ''"
+     * @param null $after
      */
     public function __construct($type, $length, $null = self::NOT_NULL, $default='',$complement='',$after=null)
     {

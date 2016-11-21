@@ -20,7 +20,8 @@ class AutoInstallMigration extends Migration
 
     /**
      * InstallMigration constructor.
-     * @param string $name
+     * @param null $tableName
+     * @internal param string $name
      */
     public function __construct($tableName=null)
     {

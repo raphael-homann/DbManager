@@ -18,6 +18,7 @@ class PrestashopDbAdapter implements DbAdapter{
 
     /**
      * PrestashopDbAdapter constructor.
+     * @param $db
      */
     public function __construct($db)
     {

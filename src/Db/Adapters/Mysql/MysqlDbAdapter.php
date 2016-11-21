@@ -14,6 +14,7 @@ class MysqlDbAdapter implements DbAdapter{
 
     /**
      * PrestashopDbAdapter constructor.
+     * @param $db
      */
     public function __construct($db)
     {

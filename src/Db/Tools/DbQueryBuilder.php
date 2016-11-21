@@ -293,6 +293,7 @@ class DbQueryBuilder
      * Add a query hint modifier (ex SQL_NO_CACHE)
      *
      * @param $queryHint
+     * @return $this
      */
     public function queryHint($queryHint)
     {

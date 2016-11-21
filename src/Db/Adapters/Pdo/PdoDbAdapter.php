@@ -20,6 +20,7 @@ class PdoDbAdapter extends AbstractDbAdapter{
 
     /**
      * PrestashopDbAdapter constructor.
+     * @param \PDO $db
      */
     public function __construct(\PDO $db)
     {
@@ -32,6 +33,7 @@ class PdoDbAdapter extends AbstractDbAdapter{
      * @param array $params
      * @param bool $forceMaster
      * @return DbResultAdapter
+     * @throws DbException
      */
     public function execute($query, $params = array(), $forceMaster = false)
     {
