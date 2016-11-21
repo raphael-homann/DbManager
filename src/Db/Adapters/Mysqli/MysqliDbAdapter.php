@@ -2,8 +2,8 @@
 namespace Efrogg\Db\Adapters\Mysqli;
 
 
-use efrogg\Db\Adapters\AbstractDbAdapter;
-use efrogg\Db\Exception\DbException;
+use Efrogg\Db\Adapters\AbstractDbAdapter;
+use Efrogg\Db\Exception\DbException;
 use mysqli;
 
 class MysqliDbAdapter extends AbstractDbAdapter  {

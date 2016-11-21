@@ -2,8 +2,8 @@
 namespace Efrogg\Db\Adapters\Pdo;
 
 
-use efrogg\Db\Adapters\DbAdapter;
-use efrogg\Db\Adapters\DbResultAdapter;
+use Efrogg\Db\Adapters\DbAdapter;
+use Efrogg\Db\Adapters\DbResultAdapter;
 
 class PdoDbResult implements DbResultAdapter {
 

@@ -2,7 +2,7 @@
 namespace Efrogg\Db\Adapters\Mysqli;
 
 
-use efrogg\Db\Adapters\DbResultAdapter;
+use Efrogg\Db\Adapters\DbResultAdapter;
 
 class MysqliDbResult implements DbResultAdapter  {
 

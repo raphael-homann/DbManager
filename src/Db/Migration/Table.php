@@ -9,9 +9,9 @@
 namespace Efrogg\Db\Migration;
 
 
-use efrogg\Db\Adapters\DbAdapter;
-use efrogg\Db\Adapters\DbResultAdapter;
-use efrogg\Db\Exception\DbException;
+use Efrogg\Db\Adapters\DbAdapter;
+use Efrogg\Db\Adapters\DbResultAdapter;
+use Efrogg\Db\Exception\DbException;
 
 class Table
 {

@@ -2,12 +2,12 @@
 
 namespace Efrogg\Db\Adapters\Pdo;
 
-use efrogg\Db\Adapters\DbAdapter;
-use efrogg\Db\Adapters\DbResultAdapter;
-use efrogg\Db\Adapters\AbstractDbAdapter;
-use efrogg\Db\Exception\DbException;
-use efrogg\Db\Adapters\Mysql\MysqlDbResult;
-use efrogg\Db\Adapters\Pdo\PdoDbResult;
+use Efrogg\Db\Adapters\DbAdapter;
+use Efrogg\Db\Adapters\DbResultAdapter;
+use Efrogg\Db\Adapters\AbstractDbAdapter;
+use Efrogg\Db\Exception\DbException;
+use Efrogg\Db\Adapters\Mysql\MysqlDbResult;
+use Efrogg\Db\Adapters\Pdo\PdoDbResult;
 
 class PdoDbAdapter extends AbstractDbAdapter{
     /** @var  \PDO */

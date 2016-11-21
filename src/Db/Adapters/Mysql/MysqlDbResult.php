@@ -2,7 +2,7 @@
 namespace Efrogg\Db\Adapters\Mysql;
 
 
-use efrogg\Db\Adapters\DbResultAdapter;
+use Efrogg\Db\Adapters\DbResultAdapter;
 
 class MysqlDbResult implements DbResultAdapter {
 

@@ -2,10 +2,10 @@
 
 namespace Efrogg\Db\Adapters\Mysql;
 
-use efrogg\Db\Adapters\DbAdapter;
-use efrogg\Db\Adapters\DbResultAdapter;
-use efrogg\Db\Tools;
-use efrogg\Db\Tools\DbTools;
+use Efrogg\Db\Adapters\DbAdapter;
+use Efrogg\Db\Adapters\DbResultAdapter;
+use Efrogg\Db\Query\DbQueryBuilder;
+use Efrogg\Db\Tools\DbTools;
 
 class MysqlDbAdapter implements DbAdapter{
     /** @var  resource */
@@ -30,7 +30,7 @@ class MysqlDbAdapter implements DbAdapter{
      */
     public function execute($query, $params = array(), $forceMaster = false)
     {
-        if($query instanceof Tools\DbQueryBuilder) $sql = $query->buildQuery();
+        if($query instanceof DbQueryBuilder) $sql = $query->buildQuery();
         else $sql = DbTools::protegeRequete($query,$params);
 
         return new MysqlDbResult(mysql_query($sql,$this->db));

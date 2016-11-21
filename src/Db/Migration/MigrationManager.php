@@ -8,7 +8,7 @@
 
 namespace Efrogg\Db\Migration;
 
-use efrogg\Db\Adapters\DbAdapter;
+use Efrogg\Db\Adapters\DbAdapter;
 
 class MigrationManager
 {

@@ -2,11 +2,11 @@
 
 namespace Efrogg\Db\Adapters\Prestashop;
 
-use efrogg\Db\Adapters\DbAdapter;
-use efrogg\Db\Adapters\DbResultAdapter;
-use efrogg\Db\Adapters\Mysql\MysqlDbResult;
-use efrogg\Db\Adapters\Pdo\PdoDbResult;
-use efrogg\Db\Tools\DbTools;
+use Efrogg\Db\Adapters\DbAdapter;
+use Efrogg\Db\Adapters\DbResultAdapter;
+use Efrogg\Db\Adapters\Mysql\MysqlDbResult;
+use Efrogg\Db\Adapters\Pdo\PdoDbResult;
+use Efrogg\Db\Tools\DbTools;
 
 class PrestashopDbAdapter implements DbAdapter{
     /** @var  \Db */
