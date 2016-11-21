@@ -8,6 +8,7 @@ use Efrogg\Db\Adapters\AbstractDbAdapter;
 use Efrogg\Db\Exception\DbException;
 use Efrogg\Db\Adapters\Mysql\MysqlDbResult;
 use Efrogg\Db\Adapters\Pdo\PdoDbResult;
+use Efrogg\Db\Query\DbQueryBuilder;
 
 class PdoDbAdapter extends AbstractDbAdapter{
     /** @var  \PDO */
@@ -37,6 +38,8 @@ class PdoDbAdapter extends AbstractDbAdapter{
      */
     public function execute($query, $params = array(), $forceMaster = false)
     {
+        if($query instanceof DbQueryBuilder) $query = $query->buildQuery();
+
         $stmt = $this->db->prepare($query);
         $stmt->execute($params);
 

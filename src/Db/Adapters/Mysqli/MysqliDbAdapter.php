@@ -4,6 +4,8 @@ namespace Efrogg\Db\Adapters\Mysqli;
 
 use Efrogg\Db\Adapters\AbstractDbAdapter;
 use Efrogg\Db\Exception\DbException;
+use Efrogg\Db\Query\DbQueryBuilder;
+use Efrogg\Db\Tools\DbTools;
 use mysqli;
 
 class MysqliDbAdapter extends AbstractDbAdapter  {
@@ -17,10 +19,11 @@ class MysqliDbAdapter extends AbstractDbAdapter  {
     public function execute($query,$params=array(), $forceMaster = false)
     {
         // protection des param�tres
-        $req = \MysqlManager::protegeRequete($query, $params);
+        if($query instanceof DbQueryBuilder) $sql = $query->buildQuery();
+        else $sql = DbTools::protegeRequete($query,$params);
 
         // execution de la requete
-        $result = new MysqliDbResult($this -> db->query($req));
+        $result = new MysqliDbResult($this -> db->query($sql));
 
         if($this->throws_exceptions && !$result->isValid()) {
 //            var_dump($result->getErrorMessage(),$result->getErrorCode());
