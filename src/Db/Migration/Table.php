@@ -37,8 +37,11 @@ class Table
 
 
     public function exists() {
-        $result = $this -> db -> execute("SHOW TABLES LIKE '".$this->table_name."'") -> fetch();
-        return (bool)$result;
+        static $exists = null;
+        if(null === $exists) {
+            $exists=(bool)$this -> db -> execute("SHOW TABLES LIKE '".$this->table_name."'") -> fetch();
+        }
+        return $exists;
     }
 
     public function create($createString) {
@@ -74,17 +77,24 @@ class Table
     }
 
     public function removeColumn($columnName) {
-        echo "todo : removeColumn $columnName";
+        if($this->exists() && $this->columnExists($columnName)) {
+            $sql = "ALTER TABLE `".$this->table_name."` DROP `$columnName` ";
+            $res = $this -> db -> execute($sql);
+            return $res->isValid();
+        }
+        return true;
     }
     public function addColumn($columnName,ColumnType $columnType,Key $keyType = null) {
-        if(!$this->columnExists($columnName)) {
+        if($this->exists() && !$this->columnExists($columnName)) {
             $sql = "ALTER TABLE `".$this->table_name."` ADD `$columnName` ".$columnType->toSql();
-            $this -> db -> execute($sql);
-            //TODO : erreur
+            $res = $this -> db -> execute($sql);
+            if(!$res->isValid()) return false;
             if(!is_null($keyType)) {
-                $this -> addKey($columnName,$keyType);
+                return $this -> addIndex($columnName,$keyType);
             }
+            return $res->isValid();
         }
+        return true;
     }
 
     public function setDb(DbAdapter $db)
@@ -100,9 +110,14 @@ class Table
         return (bool)$column;
     }
 
-    private function addKey($columnName, Key $keyType)
+    protected function addIndex($index_name, Key $keyType,$columns=null)
     {
-        echo "TODO : add key";
-        //TODO
+        if($this->exists() && !$this->columnExists($index_name)) {
+            if(null===$columns) $columns=$index_name;
+            $sql = "ALTER TABLE `".$this->table_name."` ADD $keyType `$index_name` (".$columns.")";
+            $res = $this -> db -> execute($sql);
+            return $res->isValid();
+        }
+        return true;
     }
 }
