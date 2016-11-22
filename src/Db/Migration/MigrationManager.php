@@ -193,8 +193,9 @@ class MigrationManager
         if(is_dir($path)) {
             $migrations = array();
             foreach(glob($path."/Migration*.php") as $fileName) {
-                if(preg_match("/(Migration([a-e0-9_-]*)).php/iU",$fileName,$match)) {
+                if(preg_match("/(Migration([a-z0-9_-]*)).php/iU",$fileName,$match)) {
                     $className = $namespace.$match[1];
+                    require_once $fileName;
                     $migrations[$match[2]] = new $className();
                 }
             };
