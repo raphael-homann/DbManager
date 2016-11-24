@@ -9,7 +9,7 @@
 namespace Efrogg\Db\Query;
 
 
-class DbQueryDecorator
+class DbQueryDecorator implements DecoratorInterface
 {
     /** @var  callable */
     protected $decorate_function;
