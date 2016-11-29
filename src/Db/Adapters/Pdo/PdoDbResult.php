@@ -21,9 +21,14 @@ class PdoDbResult implements DbResultAdapter {
         return $this -> statement -> fetch($this->getFetchStyle($type));
     }
 
+    protected $__fetch_all = [];
     public function fetchAll($type=self::FETCH_TYPE_ASSOC)
     {
-        return $this -> statement -> fetchAll($this->getFetchStyle($type));
+        if(null === $this->__fetch_all[$type]) {
+            $this->__fetch_all[$type] = $this -> statement -> fetchAll($this->getFetchStyle($type));
+        }
+        return $this->__fetch_all[$type];
+
     }
 
     public function fetchColumn($column = 0)
@@ -31,11 +36,7 @@ class PdoDbResult implements DbResultAdapter {
         if(is_int($column)) {
             return $this -> statement -> fetchColumn($column);
         } else {
-            $column_data=array();
-            foreach($this->fetchAll() as $row) {
-                $column_data[]=$row[$column];
-            }
-            return $column_data;
+            return array_column($this->fetchAll(),$column);
         }
     }
 
