@@ -51,6 +51,10 @@ class DbTools
     {
         $res=unpack('H*', $string);
         return '0x'.$res[1];
+    }
 
+    public static function getHash32($str)
+    {
+        return hexdec("0x" . substr(md5($str), 0, 8));
     }
 }
