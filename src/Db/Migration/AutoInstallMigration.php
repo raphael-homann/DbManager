@@ -37,7 +37,7 @@ class AutoInstallMigration extends Migration
             -> table($this->tableName)
             -> create("CREATE TABLE ".$this->tableName." (
                 `id_migration` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-                `migration_name` VARCHAR(512) NOT NULL ,
+                `migration_name` VARCHAR(255) NOT NULL ,
                 `batch` SMALLINT UNSIGNED NOT NULL ,
                 INDEX `batch` (`batch`),
                 PRIMARY KEY `id_migration` (`id_migration`),
