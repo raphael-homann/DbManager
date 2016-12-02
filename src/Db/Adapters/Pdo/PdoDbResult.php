@@ -24,7 +24,7 @@ class PdoDbResult implements DbResultAdapter {
     protected $__fetch_all = [];
     public function fetchAll($type=self::FETCH_TYPE_ASSOC)
     {
-        if(null === $this->__fetch_all[$type]) {
+        if(!array_key_exists($type,$this->__fetch_all)) {
             $this->__fetch_all[$type] = $this -> statement -> fetchAll($this->getFetchStyle($type));
         }
         return $this->__fetch_all[$type];
