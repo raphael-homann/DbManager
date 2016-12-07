@@ -3,6 +3,7 @@ namespace Efrogg\Db\Adapters\Mysqli;
 
 
 use Efrogg\Db\Adapters\AbstractDbAdapter;
+use Efrogg\Db\Context\DbQueryContextInterface;
 use Efrogg\Db\Exception\DbException;
 use Efrogg\Db\Query\DbQueryBuilder;
 use Efrogg\Db\Tools\DbTools;
@@ -16,7 +17,7 @@ class MysqliDbAdapter extends AbstractDbAdapter  {
     public function __construct(mysqli $db) {
         $this -> db = $db;
     }
-    public function execute($query,$params=array(), $forceMaster = false)
+    public function execute($query,$params=array(), DbQueryContextInterface $context = null)
     {
         // protection des param�tres
         if($query instanceof DbQueryBuilder) $sql = $query->buildQuery();

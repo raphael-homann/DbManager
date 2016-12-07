@@ -5,6 +5,7 @@ namespace Efrogg\Db\Adapters\Pdo;
 use Efrogg\Db\Adapters\DbAdapter;
 use Efrogg\Db\Adapters\DbResultAdapter;
 use Efrogg\Db\Adapters\AbstractDbAdapter;
+use Efrogg\Db\Context\DbQueryContextInterface;
 use Efrogg\Db\Exception\DbException;
 use Efrogg\Db\Adapters\Mysql\MysqlDbResult;
 use Efrogg\Db\Adapters\Pdo\PdoDbResult;
@@ -32,11 +33,11 @@ class PdoDbAdapter extends AbstractDbAdapter{
     /**
      * @param $query
      * @param array $params
-     * @param bool $forceMaster
+     * @param DbQueryContextInterface $context
      * @return DbResultAdapter
      * @throws DbException
      */
-    public function execute($query, $params = array(), $forceMaster = false)
+    public function execute($query, $params = array(), DbQueryContextInterface $context = null)
     {
         if($query instanceof DbQueryBuilder) $query = $query->buildQuery();
 

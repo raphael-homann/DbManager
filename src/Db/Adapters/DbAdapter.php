@@ -3,14 +3,18 @@
 namespace Efrogg\Db\Adapters;
 
 
+
+
+use Efrogg\Db\Context\DbQueryContextInterface;
+
 interface DbAdapter {
     /**
      * @param $query
      * @param array $params
-     * @param bool $forceMaster
+     * @param DbQueryContextInterface $context
      * @return DbResultAdapter
      */
-    public function execute($query,$params=array(), $forceMaster=false);
+    public function execute($query,$params=array(), DbQueryContextInterface $context = null);
 
     /**
      * @return string
