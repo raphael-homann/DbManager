@@ -29,22 +29,25 @@ class MysqliDbResult implements DbResultAdapter  {
 
     }
 
+    // cache nécessaire pour effectuer plusieurs fois le fetchAll
+    protected $__fetch_all = [];
     public function fetchAll($type=self::FETCH_TYPE_ASSOC)
     {
         if(false === $this->resource) {
             return [];
         }
-
-        return $this -> resource -> fetch_all($this->getFetchType($type));
-
-    }
+        if(!array_key_exists($type,$this->__fetch_all)) {
+            $this->__fetch_all[$type] = $this -> resource -> fetch_all($this->getFetchType($type));
+        }
+        return $this->__fetch_all[$type];
+        }
 
     public function fetchColumn($column = 0)
     {
-        if(is_int($column)) $fetchType = MYSQLI_NUM;
-        else $fetchType = MYSQLI_ASSOC;
+        if(is_int($column)) $fetchType = self::FETCH_TYPE_ARRAY;
+        else $fetchType = self::FETCH_TYPE_ASSOC;
 
-        $all = $this -> resource -> fetch_all($fetchType);
+        $all = $this -> fetchAll($fetchType);
 
         $result=array();
         foreach($all as $value) {

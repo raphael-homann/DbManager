@@ -21,6 +21,7 @@ class PdoDbResult implements DbResultAdapter {
         return $this -> statement -> fetch($this->getFetchStyle($type));
     }
 
+    // cache nécessaire pour effectuer plusieurs fois le fetchAll
     protected $__fetch_all = [];
     public function fetchAll($type=self::FETCH_TYPE_ASSOC)
     {
