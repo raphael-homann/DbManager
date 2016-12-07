@@ -94,4 +94,12 @@ class PdoDbResult implements DbResultAdapter {
             return \PDO::FETCH_BOTH;
         }
     }
+
+    /**
+     * @return int
+     */
+    public function rowCount()
+    {
+        return $this->statement->rowCount();
+    }
 }

@@ -96,4 +96,12 @@ class MysqlDbResult implements DbResultAdapter {
     {
         return mysql_error($this->resource);   //todo : ne doit pas marcher.... non plus ....
     }
+
+    /**
+     * @return int
+     */
+    public function rowCount()
+    {
+        return mysql_num_rows($this->resource);
+    }
 }

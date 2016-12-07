@@ -112,4 +112,12 @@ class MysqliDbResult implements DbResultAdapter  {
         return MYSQLI_NUM;
 
     }
+
+    /**
+     * @return int
+     */
+    public function rowCount()
+    {
+        return $this->resource->num_rows;
+    }
 }

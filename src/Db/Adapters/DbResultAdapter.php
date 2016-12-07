@@ -47,4 +47,9 @@ interface DbResultAdapter {
      * @return String
      */
     public function getErrorMessage();
+
+    /**
+     * @return int
+     */
+    public function rowCount();
 }
