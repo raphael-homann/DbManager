@@ -4,6 +4,7 @@ namespace Efrogg\Db\Adapters\Mysql;
 
 use Efrogg\Db\Adapters\DbAdapter;
 use Efrogg\Db\Adapters\DbResultAdapter;
+use Efrogg\Db\Context\DbQueryContextInterface;
 use Efrogg\Db\Query\DbQueryBuilder;
 use Efrogg\Db\Tools\DbTools;
 
@@ -28,7 +29,7 @@ class MysqlDbAdapter implements DbAdapter{
      * @param bool $forceMaster
      * @return DbResultAdapter
      */
-    public function execute($query, $params = array(), $forceMaster = false)
+    public function execute($query,$params=array(), DbQueryContextInterface $context = null)
     {
         if($query instanceof DbQueryBuilder) $sql = $query->buildQuery();
         else $sql = DbTools::protegeRequete($query,$params);
