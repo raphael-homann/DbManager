@@ -26,10 +26,14 @@ class MysqliDbAdapter extends AbstractDbAdapter  {
         // execution de la requete
         $result = new MysqliDbResult($this -> db->query($sql));
 
-        if($this->throws_exceptions && !$result->isValid()) {
-//            var_dump($result->getErrorMessage(),$result->getErrorCode());
-            throw new DbException($this->db->error,$this->db->errno);
+        if(!$result->isValid()) {
+            $this->dispatchError($query,$params,$this->db->error);
+            if($this->throws_exceptions ) {
+    //            var_dump($result->getErrorMessage(),$result->getErrorCode());
+                throw new DbException($this->db->error,$this->db->errno);
+            }
         }
+
         return $result;
 
     }

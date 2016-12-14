@@ -123,4 +123,12 @@ class MysqliDbResult implements DbResultAdapter  {
     {
         return $this->resource->num_rows;
     }
+
+    /**
+     * @return \mysqli_result
+     */
+    public function getResource()
+    {
+        return $this->resource;
+    }
 }

@@ -104,4 +104,12 @@ class MysqlDbResult implements DbResultAdapter {
     {
         return mysql_num_rows($this->resource);
     }
+
+    /**
+     * @return resource
+     */
+    public function getResource()
+    {
+        return $this->resource;
+    }
 }

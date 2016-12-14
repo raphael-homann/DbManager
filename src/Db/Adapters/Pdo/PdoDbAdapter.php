@@ -11,7 +11,7 @@ use Efrogg\Db\Adapters\Mysql\MysqlDbResult;
 use Efrogg\Db\Adapters\Pdo\PdoDbResult;
 use Efrogg\Db\Query\DbQueryBuilder;
 
-class PdoDbAdapter extends AbstractDbAdapter{
+class PdoDbAdapter extends AbstractDbAdapter {
     /** @var  \PDO */
     protected $db;
     /** @var  PdoDbResult */

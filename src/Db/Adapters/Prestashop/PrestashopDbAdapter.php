@@ -80,6 +80,6 @@ class PrestashopDbAdapter implements DbAdapter{
 
     public function getName()
     {
-        // TODO: Implement getName() method.
+        return "Db";
     }
 }

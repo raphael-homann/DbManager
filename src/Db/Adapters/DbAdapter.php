@@ -6,8 +6,9 @@ namespace Efrogg\Db\Adapters;
 
 
 use Efrogg\Db\Context\DbQueryContextInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-interface DbAdapter {
+interface DbAdapter extends EventDispatcherInterface{
     /**
      * @param $query
      * @param array $params

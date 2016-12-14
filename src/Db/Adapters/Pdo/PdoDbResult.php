@@ -103,4 +103,9 @@ class PdoDbResult implements DbResultAdapter {
     {
         return $this->statement->rowCount();
     }
+
+    public function getResource()
+    {
+        return $this->statement;
+    }
 }

@@ -9,7 +9,10 @@
 namespace Efrogg\Db\Adapters;
 
 
-abstract class AbstractDbAdapter implements DbAdapter
+use Efrogg\Db\Event\DatabaseEvent;
+use Symfony\Component\EventDispatcher\EventDispatcher;
+
+abstract class AbstractDbAdapter extends EventDispatcher implements DbAdapter
 {
 
     /** @var  bool */
@@ -36,6 +39,15 @@ abstract class AbstractDbAdapter implements DbAdapter
     public function setName($name)
     {
         $this->name = $name;
+    }
+
+    public function dispatchError($queryString, $params, $error)
+    {
+        $event = new DatabaseEvent();
+        $event->query = $queryString;
+        $event->parameters = $params;
+        $event->error = $error;
+        $this->dispatch(DatabaseEvent::ERROR,$event);
     }
 
 }

@@ -52,4 +52,6 @@ interface DbResultAdapter {
      * @return int
      */
     public function rowCount();
+
+    public function getResource();
 }

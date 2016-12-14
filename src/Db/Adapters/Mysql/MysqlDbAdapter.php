@@ -2,13 +2,14 @@
 
 namespace Efrogg\Db\Adapters\Mysql;
 
+use Efrogg\Db\Adapters\AbstractDbAdapter;
 use Efrogg\Db\Adapters\DbAdapter;
 use Efrogg\Db\Adapters\DbResultAdapter;
 use Efrogg\Db\Context\DbQueryContextInterface;
 use Efrogg\Db\Query\DbQueryBuilder;
 use Efrogg\Db\Tools\DbTools;
 
-class MysqlDbAdapter implements DbAdapter{
+class MysqlDbAdapter extends AbstractDbAdapter {
     /** @var  resource */
     protected $db;
 
