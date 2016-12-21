@@ -29,9 +29,17 @@ class DbTools
 
         $retour =  preg_replace_callback('/\?/',
             function($dummy) use (&$params) {
-                if(is_array($params)) $p=array_shift($params);
-                else $p=$params;
-                return self::protegeParam($p);
+                if(is_array($params)) {
+                    if(!empty($params)) {
+                        $p=array_shift($params);
+                        return self::protegeParam($p);
+                    }
+                } else {
+                    if(!is_null($params)) {
+                        return self::protegeParam($params);
+                    }
+                }
+                return "?";
             }
             , $req);
 
