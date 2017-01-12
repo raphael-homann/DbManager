@@ -2,7 +2,7 @@
 
 namespace Efrogg\Db\Adapters\Prestashop;
 
-use Efrogg\Db\Adapters\DbAdapter;
+use Efrogg\Db\Adapters\AbstractDbAdapter;
 use Efrogg\Db\Adapters\DbResultAdapter;
 use Efrogg\Db\Adapters\Mysql\MysqlDbResult;
 use Efrogg\Db\Adapters\Pdo\PdoDbResult;
@@ -10,7 +10,7 @@ use Efrogg\Db\Context\DbQueryContextInterface;
 use Efrogg\Db\Query\DbQueryBuilder;
 use Efrogg\Db\Tools\DbTools;
 
-class PrestashopDbAdapter implements DbAdapter{
+class PrestashopDbAdapter extends AbstractDbAdapter{
     /** @var  \Db */
     protected $db;
 
