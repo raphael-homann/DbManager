@@ -71,11 +71,14 @@ class MysqliDbResult implements DbResultAdapter  {
      */
     public function fetchObject($class_name = null, array $params = null)
     {
-        if(!is_null($params)) {
-            return $this->resource -> fetch_object($class_name , $params);
-        } else {
-            return $this->resource -> fetch_object($class_name);
+        if($this->resource) {
+            if(!is_null($params)) {
+                return $this->resource -> fetch_object($class_name , $params);
+            } else {
+                return $this->resource -> fetch_object($class_name);
+            }
         }
+        return null;
     }
 
     public function fetchAllObject($class_name = "stdClass", array $params = null)

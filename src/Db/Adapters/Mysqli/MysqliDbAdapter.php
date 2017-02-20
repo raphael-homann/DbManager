@@ -19,7 +19,7 @@ class MysqliDbAdapter extends AbstractDbAdapter  {
     }
     public function execute($query,$params=array(), DbQueryContextInterface $context = null)
     {
-        // protection des paramï¿½tres
+        // protection des paramètres
         if($query instanceof DbQueryBuilder) $sql = $query->buildQuery();
         else $sql = DbTools::protegeRequete($query,$params);
 
