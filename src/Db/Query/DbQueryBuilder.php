@@ -176,10 +176,13 @@ class DbQueryBuilder
     /**
      * Build query string from setted data
      *
+     * @param bool $insertValues :
+     * si true : insère les valeurs dans la requete, en mode protégé
+     * si false : renvoie ? à la place des valeurs, getWhereValues permettra de récupérer les valeurs
      * @return string
      * @throws Exception
      */
-    public function buildQuery()
+    public function buildQuery($insertValues = true)
     {
         $where   = implode(' ', $this->_where);
         $join    = implode(' ', $this->_join);
@@ -285,7 +288,7 @@ class DbQueryBuilder
                 break;
         }
 
-        if(!empty($this->_whereValues)) {
+        if($insertValues && !empty($this->_whereValues)) {
             return DbTools::protegeRequete($query,$this->_whereValues);
         }
         return trim($query);
@@ -532,9 +535,16 @@ class DbQueryBuilder
             $booleanOperator = "WHERE";
         }
 
+        if(is_array($value)) {
+            // raw
+            $this->_where[] = sprintf("%s %s %s %s", $booleanOperator, $field, $comparisonOperator, implode(" ",$value));
+        } else {
+            // prepared
+            $this->_where[] = sprintf("%s %s %s %s", $booleanOperator, $field, $comparisonOperator, "?");
+            $this->_whereValues[]=$value;
+
+        }
         // create and store where
-        $this->_where[] = sprintf("%s %s %s %s", $booleanOperator, $field, $comparisonOperator, "?");
-        $this->_whereValues[]=$value;
         return $this;
     }
 
@@ -705,11 +715,11 @@ class DbQueryBuilder
                     }
                     // custom value with prepared data or raw mysql if value is in an array
                     if (isset($oneCritera['value'])) {
-                        if (is_array($oneCritera['value']) && isset($oneCritera['value'][0])) {
-                            $val = $oneCritera['value'][0];
-                        } else {
-                            $val = $oneCritera['value'];
-                        }
+//                        if (is_array($oneCritera['value']) && isset($oneCritera['value'][0])) {
+//                            $val = array($oneCritera['value'][0]);
+//                        } else {
+                        $val = $oneCritera['value'];
+//                        }
                     }
                 }
             } else {
