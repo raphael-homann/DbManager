@@ -17,7 +17,7 @@ class MysqliDbResult implements DbResultAdapter  {
 
     public function fetch($type=self::FETCH_TYPE_ASSOC)
     {
-        if(false === $this -> resource) {
+        if(!$this->isValid()) {
             return false;
         }
 
@@ -33,7 +33,7 @@ class MysqliDbResult implements DbResultAdapter  {
     protected $__fetch_all = [];
     public function fetchAll($type=self::FETCH_TYPE_ASSOC)
     {
-        if(false === $this->resource) {
+        if(!$this->isValid()) {
             return [];
         }
         if(!array_key_exists($type,$this->__fetch_all)) {
@@ -61,7 +61,7 @@ class MysqliDbResult implements DbResultAdapter  {
      */
     public function isValid()
     {
-        return $this -> resource !== false;
+        return !empty($this -> resource);
     }
 
     /**
@@ -74,8 +74,10 @@ class MysqliDbResult implements DbResultAdapter  {
         if($this->resource) {
             if(!is_null($params)) {
                 return $this->resource -> fetch_object($class_name , $params);
+            } else if(!is_null($class_name)) {
+                return $this->resource -> fetch_object($class_name );
             } else {
-                return $this->resource -> fetch_object($class_name);
+                return $this->resource -> fetch_object();
             }
         }
         return null;
