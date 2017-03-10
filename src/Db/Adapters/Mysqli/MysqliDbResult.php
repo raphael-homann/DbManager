@@ -61,7 +61,7 @@ class MysqliDbResult implements DbResultAdapter  {
      */
     public function isValid()
     {
-        return !empty($this -> resource);
+        return $this -> resource !== false && $this->resource !== null;
     }
 
     /**
