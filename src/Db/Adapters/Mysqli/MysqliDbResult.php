@@ -10,7 +10,19 @@ class MysqliDbResult implements DbResultAdapter  {
      * @var \mysqli_result
      */
     private $resource = false;
+    /**
+     * @var null
+     */
+    protected $error_message;
+    /**
+     * @var null
+     */
+    protected $error_code;
 
+    /**
+     * MysqliDbResult constructor.
+     * @param \mysqli_result $resource
+     */
     public function __construct($resource) {
         $this->resource = $resource;
     }
@@ -96,18 +108,25 @@ class MysqliDbResult implements DbResultAdapter  {
         }
         return $result;    }
 
-
+    /**
+     * @param $errno
+     * @param $error
+     */
+    public function setErrorDetail($errno, $error)
+    {
+        $this->error_code = $errno;
+        $this->error_message = $error;
+    }
 
 
     public function getErrorCode()
     {
-        // TODO: Implement getErrorCode() method.
+        return $this->error_code;
     }
-
 
     public function getErrorMessage()
     {
-        // TODO: Implement getErrorMessage() method.
+        return $this->error_message;
     }
 
     private function getFetchType($type)
