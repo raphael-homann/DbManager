@@ -13,6 +13,9 @@ class MysqliDbAdapter extends AbstractDbAdapter  {
 
     /** @var mysqli  */
     protected $db;
+    protected $error_message;
+    protected $insert_id;
+    protected $affected_rows;
 
     public function __construct(mysqli $db) {
         $this -> db = $db;
@@ -25,6 +28,9 @@ class MysqliDbAdapter extends AbstractDbAdapter  {
 
         // execution de la requete
         $result = new MysqliDbResult($this -> db->query($sql));
+
+        $result->setAffectedRows($this->db->affected_rows);
+        $result->setInsertId($this->db->insert_id);
 
         if(!$result->isValid()) {
             $result->setErrorDetail($this->db->errno,$this->db->error);
@@ -39,14 +45,29 @@ class MysqliDbAdapter extends AbstractDbAdapter  {
 
     }
 
+    /**
+     * @deprecated
+     * @see  MysqliDbResult::getErrorMessage()
+     * @return string
+     */
     public function getError() {
         return $this->db->error;
     }
 
+    /**
+     * @deprecated
+     * @see  MysqliDbResult::getInsertId()
+     * @return string
+     */
     public function getInsertId() {
         return $this -> db->insert_id;
     }
 
+    /**
+     * @deprecated
+     * @see  MysqliDbResult::getAffectedRows()
+     * @return string
+     */
     public function getAffectedRows() {
         return $this -> db->affected_rows;
     }

@@ -51,6 +51,16 @@ interface DbResultAdapter {
     /**
      * @return int
      */
+    public function getInsertId();
+
+    /**
+     * @return int
+     */
+    public function getAffectedRows();
+
+    /**
+     * @return int
+     */
     public function rowCount();
 
     public function getResource();

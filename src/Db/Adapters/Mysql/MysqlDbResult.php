@@ -112,4 +112,20 @@ class MysqlDbResult implements DbResultAdapter {
     {
         return $this->resource;
     }
+
+    /**
+     * @return int
+     */
+    public function getInsertId()
+    {
+        // TODO: Implement getInsertId() method.
+    }
+
+    /**
+     * @return int
+     */
+    public function getAffectedRows()
+    {
+        // TODO: Implement getAffectedRows() method.
+    }
 }

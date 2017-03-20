@@ -13,7 +13,7 @@ use Efrogg\Db\Context\DbQueryContextInterface;
 use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class DbProxy implements DbAdapter
+class DbProxy extends AbstractDbAdapter
 {
 
     /** @var  DbAdapter */

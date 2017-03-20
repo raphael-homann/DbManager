@@ -45,6 +45,8 @@ class PdoDbAdapter extends AbstractDbAdapter {
         $stmt->execute($params);
 
         $result = new PdoDbResult($stmt);
+        $result->setInsertId($this->db->lastInsertId());
+        $result->setAffectedRows($stmt->rowCount());
 
         if($this->throws_exceptions && !$result->isValid()) {
 //            var_dump($result->getErrorMessage(),$result->getErrorCode());
@@ -56,6 +58,8 @@ class PdoDbAdapter extends AbstractDbAdapter {
     }
 
     /**
+     * @deprecated
+     * @see PdoDbResult::getErrorMessage()
      * @return string
      */
     public function getError()
@@ -64,6 +68,8 @@ class PdoDbAdapter extends AbstractDbAdapter {
     }
 
     /**
+     * @deprecated
+     * @see PdoDbResult::getInsertId()
      * @return int
      */
     public function getInsertId()
@@ -72,6 +78,8 @@ class PdoDbAdapter extends AbstractDbAdapter {
     }
 
     /**
+     * @deprecated
+     * @see PdoDbResult::getAffectedRows()
      * @return int
      */
     public function getAffectedRows()

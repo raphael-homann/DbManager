@@ -19,6 +19,10 @@ class MysqliDbResult implements DbResultAdapter  {
      */
     protected $error_code;
 
+    protected $affected_rows;
+
+    protected $insert_id;
+
     /**
      * MysqliDbResult constructor.
      * @param \mysqli_result $resource
@@ -41,7 +45,7 @@ class MysqliDbResult implements DbResultAdapter  {
 
     }
 
-    // cache nécessaire pour effectuer plusieurs fois le fetchAll
+    // cache nÃ©cessaire pour effectuer plusieurs fois le fetchAll
     protected $__fetch_all = [];
     public function fetchAll($type=self::FETCH_TYPE_ASSOC)
     {
@@ -154,5 +158,43 @@ class MysqliDbResult implements DbResultAdapter  {
     public function getResource()
     {
         return $this->resource;
+    }
+
+    /**
+     * @param mixed $affected_rows
+     * @return MysqliDbResult
+     */
+    public function setAffectedRows($affected_rows)
+    {
+        $this->affected_rows = $affected_rows;
+
+        return $this;
+    }
+
+    /**
+     * @param mixed $insert_id
+     * @return MysqliDbResult
+     */
+    public function setInsertId($insert_id)
+    {
+        $this->insert_id = $insert_id;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAffectedRows()
+    {
+        return $this->affected_rows;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getInsertId()
+    {
+        return $this->insert_id;
     }
 }

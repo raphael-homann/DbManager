@@ -12,6 +12,11 @@ class PdoDbResult implements DbResultAdapter {
      */
     private $statement = false;
 
+    protected $affected_rows;
+
+    protected $insert_id;
+
+
     public function __construct(\PDOStatement $statement) {
         $this->statement = $statement;
     }
@@ -21,7 +26,7 @@ class PdoDbResult implements DbResultAdapter {
         return $this -> statement -> fetch($this->getFetchStyle($type));
     }
 
-    // cache nécessaire pour effectuer plusieurs fois le fetchAll
+    // cache nï¿½cessaire pour effectuer plusieurs fois le fetchAll
     protected $__fetch_all = [];
     public function fetchAll($type=self::FETCH_TYPE_ASSOC)
     {
@@ -107,5 +112,43 @@ class PdoDbResult implements DbResultAdapter {
     public function getResource()
     {
         return $this->statement;
+    }
+
+    /**
+     * @return int
+     */
+    public function getInsertId()
+    {
+        return $this->insert_id;
+    }
+
+    /**
+     * @return int
+     */
+    public function getAffectedRows()
+    {
+        return $this->affected_rows;
+    }
+
+    /**
+     * @param mixed $affected_rows
+     * @return PdoDbResult
+     */
+    public function setAffectedRows($affected_rows)
+    {
+        $this->affected_rows = $affected_rows;
+
+        return $this;
+    }
+
+    /**
+     * @param mixed $insert_id
+     * @return PdoDbResult
+     */
+    public function setInsertId($insert_id)
+    {
+        $this->insert_id = $insert_id;
+
+        return $this;
     }
 }
