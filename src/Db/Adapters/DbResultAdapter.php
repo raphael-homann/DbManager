@@ -64,4 +64,7 @@ interface DbResultAdapter {
     public function rowCount();
 
     public function getResource();
+
+    public function getAdapter(): DbAdapter;
+
 }

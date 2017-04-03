@@ -22,6 +22,7 @@ class MysqliDbAdapter extends AbstractDbAdapter  {
     }
     public function execute($query,$params=array(), DbQueryContextInterface $context = null)
     {
+//echo($this->getName());
         // protection des paramètres
         if($query instanceof DbQueryBuilder) $sql = $query->buildQuery();
         else $sql = DbTools::protegeRequete($query,$params);
@@ -40,6 +41,7 @@ class MysqliDbAdapter extends AbstractDbAdapter  {
                 throw new DbException($this->db->error,$this->db->errno);
             }
         }
+        $result->setAdapter($this);
 
         return $result;
 

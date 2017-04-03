@@ -2,6 +2,7 @@
 namespace Efrogg\Db\Adapters\Mysqli;
 
 
+use Efrogg\Db\Adapters\DbAdapter;
 use Efrogg\Db\Adapters\DbResultAdapter;
 
 class MysqliDbResult implements DbResultAdapter  {
@@ -22,6 +23,9 @@ class MysqliDbResult implements DbResultAdapter  {
     protected $affected_rows;
 
     protected $insert_id;
+
+    /** @var  DbAdapter */
+    protected $adapter;
 
     /**
      * MysqliDbResult constructor.
@@ -196,5 +200,24 @@ class MysqliDbResult implements DbResultAdapter  {
     public function getInsertId()
     {
         return $this->insert_id;
+    }
+
+    /**
+     * @param DbAdapter $adapter
+     * @return MysqliDbResult
+     */
+    public function setAdapter(DbAdapter $adapter): MysqliDbResult
+    {
+        $this->adapter = $adapter;
+
+        return $this;
+    }
+
+    /**
+     * @return DbAdapter
+     */
+    public function getAdapter(): DbAdapter
+    {
+        return $this->adapter;
     }
 }
