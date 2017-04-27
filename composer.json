@@ -15,7 +15,10 @@
         "symfony/event-dispatcher":"~2"
     },
     "autoload": {
-        "psr-4": { "Efrogg\\Db\\": "src/Db/" }
+        "psr-4": {
+            "Efrogg\\Db\\": "src/Db/",
+            "Efrogg\\Collection\\": "src/Collection/"
+        }
     },
     "extra": {
         "branch-alias": {
