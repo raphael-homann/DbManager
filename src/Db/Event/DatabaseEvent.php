@@ -12,6 +12,12 @@ use Symfony\Component\EventDispatcher\Event;
  */
 class DatabaseEvent extends Event
 {
+    public function __construct()
+    {
+        ob_start();
+        debug_print_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
+        $this->stack = ob_get_clean();
+    }
 
     const ERROR = "ERROR";
     const QUERY = "ERROR";
@@ -19,5 +25,6 @@ class DatabaseEvent extends Event
     public $query;
     public $error;
     public $parameters;
+    public $stack;
 
 }
