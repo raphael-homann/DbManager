@@ -537,7 +537,11 @@ class DbQueryBuilder
 
         if(is_array($value)) {
             // raw
-            $this->_where[] = sprintf("%s %s %s %s", $booleanOperator, $field, $comparisonOperator, implode(" ",$value));
+            if(strtolower($comparisonOperator) == "in") {
+                $this->_where[] = sprintf("%s %s %s (%s)", $booleanOperator, $field, $comparisonOperator, implode(",",$value));
+            } else {
+                $this->_where[] = sprintf("%s %s %s %s", $booleanOperator, $field, $comparisonOperator, implode(" ",$value));
+            }
         } else {
             // prepared
             $this->_where[] = sprintf("%s %s %s %s", $booleanOperator, $field, $comparisonOperator, "?");
@@ -699,6 +703,11 @@ class DbQueryBuilder
         return $this->_setVal;
     }
 
+    /**
+     * @param $where
+     * @param string $where_operator
+     * @return $this
+     */
     public function whereFromArray($where, $where_operator='AND')
     {
         foreach ($where as $fieldName => $oneCritera) {
@@ -728,7 +737,7 @@ class DbQueryBuilder
             $this->where($fieldName, $operator, $val, $where_operator);
         }
 
-        return $this->_whereValues;
+        return $this;
     }
 
     /**
