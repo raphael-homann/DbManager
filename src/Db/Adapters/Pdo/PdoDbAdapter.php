@@ -10,6 +10,7 @@ use Efrogg\Db\Exception\DbException;
 use Efrogg\Db\Adapters\Mysql\MysqlDbResult;
 use Efrogg\Db\Adapters\Pdo\PdoDbResult;
 use Efrogg\Db\Query\DbQueryBuilder;
+use Efrogg\Db\Tools\DbTools;
 
 class PdoDbAdapter extends AbstractDbAdapter {
     /** @var  \PDO */
@@ -39,6 +40,8 @@ class PdoDbAdapter extends AbstractDbAdapter {
      */
     public function execute($query, $params = array(), DbQueryContextInterface $context = null)
     {
+        $sql = DbTools::protegeRequete($query,$params);
+dd($sql);
         if($query instanceof DbQueryBuilder) $query = $query->buildQuery();
 
         $stmt = $this->db->prepare($query);

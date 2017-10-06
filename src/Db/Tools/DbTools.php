@@ -27,6 +27,19 @@ class DbTools
 
     public static function protegeRequete($req,$params = null) {
 
+        $named_parameters = [];
+        $params = array_filter(function($parameter,$key) use(&$named_parameters) {
+            if(is_string($key)) {
+                $named_parameters[$key] = self::protegeParam($parameter);
+                return false;
+            }
+            return true;
+        },$params);
+
+        $req = str_replace(array_keys($named_parameters),array_values($named_parameters));
+
+        dd($named_parameters,$params,$req);
+
         $retour =  preg_replace_callback('/\?/',
             function($dummy) use (&$params) {
                 if(is_array($params)) {
