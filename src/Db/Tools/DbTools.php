@@ -84,8 +84,4 @@ class DbTools
         return hexdec("0x" . substr(md5($str), 0, 8));
     }
 
-    private static function escape($value)
-    {
-        return str_replace("'","''")
-    }
 }
