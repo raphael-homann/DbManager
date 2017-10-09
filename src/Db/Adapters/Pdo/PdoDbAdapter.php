@@ -40,8 +40,6 @@ class PdoDbAdapter extends AbstractDbAdapter {
      */
     public function execute($query, $params = array(), DbQueryContextInterface $context = null)
     {
-        $sql = DbTools::protegeRequete($query,$params);
-dd($sql);
         if($query instanceof DbQueryBuilder) $query = $query->buildQuery();
 
         $stmt = $this->db->prepare($query);
@@ -57,6 +55,9 @@ dd($sql);
         }
         $this->lastResult = $result;
         $this->lastStmt = $stmt;
+
+        $result->setAdapter($this);
+
         return $result;
     }
 

@@ -2,10 +2,10 @@
 namespace Efrogg\Db\Adapters\Pdo;
 
 
-use Efrogg\Db\Adapters\DbAdapter;
+use Efrogg\Db\Adapters\AbstractDbResultAdapter;
 use Efrogg\Db\Adapters\DbResultAdapter;
 
-class PdoDbResult implements DbResultAdapter {
+class PdoDbResult extends AbstractDbResultAdapter {
 
     /**
      * @var resource
@@ -26,7 +26,7 @@ class PdoDbResult implements DbResultAdapter {
         return $this -> statement -> fetch($this->getFetchStyle($type));
     }
 
-    // cache n�cessaire pour effectuer plusieurs fois le fetchAll
+    // cache nécessaire pour effectuer plusieurs fois le fetchAll
     protected $__fetch_all = [];
     public function fetchAll($type=self::FETCH_TYPE_ASSOC)
     {
@@ -151,4 +151,5 @@ class PdoDbResult implements DbResultAdapter {
 
         return $this;
     }
+
 }

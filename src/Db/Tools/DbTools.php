@@ -20,43 +20,47 @@ class DbTools
                 if(is_null($value)) return "$key IS NULL";
                 if(is_array($value)) return "$key = ".implode(" ",$value);
                 if($use_secure) return "$key = ".self::protegeParam($value);
-                return "$key = '".pSQL($value)."'";
+                return "$key = '".pSQL($value)."'"; // todo : remplacer ça !!
             },array_keys($conditions),array_values($conditions)));
         }
     }
 
     public static function protegeRequete($req,$params = null) {
 
+        // découpe entre les paramètres nommés et les non nommés (?)
         $named_parameters = [];
-        $params = array_filter(function($parameter,$key) use(&$named_parameters) {
+        $parameters = [];
+        foreach($params as $key => $parameter_value) {
             if(is_string($key)) {
-                $named_parameters[$key] = self::protegeParam($parameter);
-                return false;
+                $named_parameters[$key] = self::protegeParam($parameter_value);
+            } else {
+                $parameters[$key] = self::protegeParam($parameter_value);
+
             }
-            return true;
-        },$params);
+        }
 
-        $req = str_replace(array_keys($named_parameters),array_values($named_parameters));
+        // remplacement des paramètres nommés
+        $req = str_replace(array_keys($named_parameters),array_values($named_parameters),$req);
 
-        dd($named_parameters,$params,$req);
-
-        $retour =  preg_replace_callback('/\?/',
-            function($dummy) use (&$params) {
-                if(is_array($params)) {
-                    if(!empty($params)) {
-                        $p=array_shift($params);
+        // remplacement des paramètres ?
+        $req =  preg_replace_callback('/\?/',
+            function($dummy) use (&$parameters) {
+                if(is_array($parameters)) {
+                    if(!empty($parameters)) {
+                        $p=array_shift($parameters);
                         return self::protegeParam($p);
                     }
                 } else {
-                    if(!is_null($params)) {
-                        return self::protegeParam($params);
+                    if(!is_null($parameters)) {
+                        return self::protegeParam($parameters);
                     }
                 }
                 return "?";
             }
             , $req);
 
-        return $retour;
+        // retour :)
+        return $req;
     }
 
     public static function protegeParam($p) {
