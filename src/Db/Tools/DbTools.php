@@ -20,7 +20,8 @@ class DbTools
                 if(is_null($value)) return "$key IS NULL";
                 if(is_array($value)) return "$key = ".implode(" ",$value);
                 if($use_secure) return "$key = ".self::protegeParam($value);
-                return "$key = '".pSQL($value)."'"; // todo : remplacer ça !!
+                throw new \Exception("unprotected parameter");
+//                return "$key = '".self::escape($value)."'"; // todo : remplacer ça !!
             },array_keys($conditions),array_values($conditions)));
         }
     }
@@ -81,5 +82,10 @@ class DbTools
     public static function getHash32($str)
     {
         return hexdec("0x" . substr(md5($str), 0, 8));
+    }
+
+    private static function escape($value)
+    {
+        return str_replace("'","''")
     }
 }
