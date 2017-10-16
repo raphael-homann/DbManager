@@ -81,11 +81,6 @@ class MysqliDbResult extends AbstractDbResultAdapter  {
         return $this -> resource !== false && $this->resource !== null;
     }
 
-    /**
-     * @param $class_name
-     * @param array $params
-     * @return object
-     */
     public function fetchObject($class_name = null, array $params = null)
     {
         if($this->resource) {

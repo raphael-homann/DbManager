@@ -54,11 +54,6 @@ class MysqlDbResult implements DbResultAdapter {
         return $this -> resource !== false;
     }
 
-    /**
-     * @param $class_name
-     * @param array $params
-     * @return array
-     */
     public function fetchObject($class_name = null, array $params = null)
     {
         if(is_null($params)) {

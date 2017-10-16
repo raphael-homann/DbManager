@@ -54,11 +54,6 @@ class PdoDbResult extends AbstractDbResultAdapter {
         return intval($this -> statement->errorCode())==0;
     }
 
-    /**
-     * @param $class_name
-     * @param array $params
-     * @return array
-     */
     public function fetchObject($class_name = "stdClass", array $params = null)
     {
         if(is_null($params)) {

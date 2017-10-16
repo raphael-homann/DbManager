@@ -13,18 +13,20 @@ interface DbResultAdapter {
 
     /**
      * @param string $type
-     * @return array|false
+     * @return array|\stdClass|false
      */
     public function fetch($type=self::FETCH_TYPE_ASSOC);
 
     /**
+     * renvoie la prochaine ligne de résultat sous forme d'objet standard
      * @param null $class_name
      * @param array $params
-     * @return array
+     * @return \stdClass
      */
     public function fetchObject($class_name = null, array $params = null);
 
     /**
+    * renvoie tous les résultats sous forme d'un tableau d'objets standards
      * @param string $type
      * @return \array[]
      */
@@ -36,6 +38,12 @@ interface DbResultAdapter {
      */
     public function fetchColumn($column_name);
 
+    /**
+     * renvoie tous les résultats sous forme d'un tableau de tableaux associatifs
+     * @param null $class_name
+     * @param array|null $params
+     * @return \stdClass[]
+     */
     public function fetchAllObject($class_name = null, array $params = null);
 
     /**
