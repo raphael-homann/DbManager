@@ -35,7 +35,7 @@ class DbTools
             if(is_string($key)) {
                 $named_parameters[$key] = self::protegeParam($parameter_value);
             } else {
-                $parameters[$key] = self::protegeParam($parameter_value);
+                $parameters[$key] = ($parameter_value);
 
             }
         }
