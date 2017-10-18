@@ -28,6 +28,10 @@ class DbTools
 
     public static function protegeRequete($req,$params = null) {
 
+        if(!is_array($params)) {
+            $params = [$params];
+        }
+
         // découpe entre les paramètres nommés et les non nommés (?)
         $named_parameters = [];
         $parameters = [];

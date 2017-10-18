@@ -22,6 +22,10 @@ class MysqliDbAdapter extends AbstractDbAdapter  {
     }
     public function execute($query,$params=array(), DbQueryContextInterface $context = null)
     {
+        if(!is_array($params)) {
+            $params = [$params];
+        }
+
 //echo($this->getName());
         // protection des paramètres
         if($query instanceof DbQueryBuilder) $sql = $query->buildQuery();

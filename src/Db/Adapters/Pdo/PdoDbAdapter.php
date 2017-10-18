@@ -41,6 +41,9 @@ class PdoDbAdapter extends AbstractDbAdapter {
     public function execute($query, $params = array(), DbQueryContextInterface $context = null)
     {
         if($query instanceof DbQueryBuilder) $query = $query->buildQuery();
+        if(!is_array($params)) {
+            $params = [$params];
+        }
 
         $stmt = $this->db->prepare($query);
         $stmt->execute($params);
