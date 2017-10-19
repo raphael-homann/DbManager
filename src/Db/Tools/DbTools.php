@@ -28,37 +28,33 @@ class DbTools
 
     public static function protegeRequete($req,$params = null) {
 
-        if(!is_array($params)) {
-            $params = [$params];
-        }
+        if(is_array($params)) {
+            // découpe entre les paramètres nommés et les non nommés (?)
+            $named_parameters = [];
+            $parameters = [];
+            foreach($params as $key => $parameter_value) {
+                if(is_string($key)) {
+                    $named_parameters[$key] = self::protegeParam($parameter_value);
+                } else {
+                    $parameters[$key] = ($parameter_value);
 
-        // découpe entre les paramètres nommés et les non nommés (?)
-        $named_parameters = [];
-        $parameters = [];
-        foreach($params as $key => $parameter_value) {
-            if(is_string($key)) {
-                $named_parameters[$key] = self::protegeParam($parameter_value);
-            } else {
-                $parameters[$key] = ($parameter_value);
-
+                }
             }
-        }
 
-        // remplacement des paramètres nommés
-        $req = str_replace(array_keys($named_parameters),array_values($named_parameters),$req);
+            // remplacement des paramètres nommés
+            $req = str_replace(array_keys($named_parameters),array_values($named_parameters),$req);
+        } else {
+            $parameters = [$params];
+        }
 
         // remplacement des paramètres ?
+        $iparam=0;
         $req =  preg_replace_callback('/\?/',
-            function($dummy) use (&$parameters) {
-                if(is_array($parameters)) {
-                    if(!empty($parameters)) {
-                        $p=array_shift($parameters);
-                        return self::protegeParam($p);
-                    }
-                } else {
-                    if(!is_null($parameters)) {
-                        return self::protegeParam($parameters);
-                    }
+            function($dummy) use (&$parameters,&$iparam) {
+                if(!empty($parameters)) {
+                    $p=$parameters[min($iparam,count($parameters)-1)];
+                    $iparam++;
+                    return self::protegeParam($p);
                 }
                 return "?";
             }
