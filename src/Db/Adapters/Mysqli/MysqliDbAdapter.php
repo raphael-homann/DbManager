@@ -42,7 +42,7 @@ class MysqliDbAdapter extends AbstractDbAdapter  {
             }
         }
         $result->setAdapter($this);
-
+        $result -> setQuery($query);
         return $result;
 
     }

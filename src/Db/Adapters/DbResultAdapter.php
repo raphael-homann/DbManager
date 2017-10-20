@@ -77,4 +77,14 @@ interface DbResultAdapter {
 
     public function getAdapter();
 
+    /**
+     * @return string|DbQueryBuilder
+     */
+    public function getQuery();
+
+    /**
+     * @param string|DbQueryBuilder $query
+     */
+    public function setQuery($query);
+
 }

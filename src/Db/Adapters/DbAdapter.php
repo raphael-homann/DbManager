@@ -6,11 +6,12 @@ namespace Efrogg\Db\Adapters;
 
 
 use Efrogg\Db\Context\DbQueryContextInterface;
+use Efrogg\Db\Query\DbQueryBuilder;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 interface DbAdapter extends EventDispatcherInterface{
     /**
-     * @param $query
+     * @param string|DbQueryBuilder $query
      * @param array $params
      * @param DbQueryContextInterface $context
      * @return DbResultAdapter

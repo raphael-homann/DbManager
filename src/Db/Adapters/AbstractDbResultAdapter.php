@@ -18,6 +18,7 @@ abstract class AbstractDbResultAdapter implements DbResultAdapter
      * @var DbAdapter
      */
     protected $adapter;
+    protected $query;
 
     /**
      * @param DbAdapter $adapter
@@ -38,4 +39,19 @@ abstract class AbstractDbResultAdapter implements DbResultAdapter
         return $this->adapter;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getQuery()
+    {
+        return $this->query;
+    }
+
+    /**
+     * @param mixed $query
+     */
+    public function setQuery($query)
+    {
+        $this->query = $query;
+    }
 }
