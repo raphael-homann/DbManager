@@ -20,7 +20,7 @@ trait DbAdapterAwareTrait
      * @param DbAdapter $db
      * @return $this
      */
-    public function setDb(DbAdapter $db): self
+    public function setDb(DbAdapter $db)
     {
         $this->db = $db;
 
@@ -30,7 +30,7 @@ trait DbAdapterAwareTrait
     /**
      * @return DbAdapter
      */
-    public function getDb(): DbAdapter
+    public function getDb()
     {
         return $this->db;
     }

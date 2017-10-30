@@ -73,6 +73,8 @@ interface DbResultAdapter {
 
     public function getResource();
 
-    public function getAdapter(): DbAdapter;
+    public function setAdapter(DbAdapter $adapter);
+
+    public function getAdapter();
 
 }

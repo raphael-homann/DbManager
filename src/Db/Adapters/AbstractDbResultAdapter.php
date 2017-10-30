@@ -2,23 +2,28 @@
 /**
  * Created by PhpStorm.
  * User: raph
- * Date: 06/10/17
- * Time: 11:47
+ * Date: 14/10/16
+ * Time: 17:19
  */
 
 namespace Efrogg\Db\Adapters;
 
 
+use Efrogg\Db\Event\DatabaseEvent;
+use Symfony\Component\EventDispatcher\EventDispatcher;
 
 abstract class AbstractDbResultAdapter implements DbResultAdapter
 {
+    /**
+     * @var DbAdapter
+     */
     protected $adapter;
 
     /**
      * @param DbAdapter $adapter
      * @return $this
      */
-    public function setAdapter(DbAdapter $adapter): self
+    public function setAdapter(DbAdapter $adapter)
     {
         $this->adapter = $adapter;
 
@@ -28,8 +33,9 @@ abstract class AbstractDbResultAdapter implements DbResultAdapter
     /**
      * @return DbAdapter
      */
-    public function getAdapter(): DbAdapter
+    public function getAdapter()
     {
         return $this->adapter;
     }
+
 }

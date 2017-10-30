@@ -2,9 +2,9 @@
 namespace Efrogg\Db\Adapters\Mysql;
 
 
-use Efrogg\Db\Adapters\DbResultAdapter;
+use Efrogg\Db\Adapters\AbstractDbResultAdapter;
 
-class MysqlDbResult implements DbResultAdapter {
+class MysqlDbResult extends AbstractDbResultAdapter {
 
     /**
      * @var resource
@@ -123,4 +123,5 @@ class MysqlDbResult implements DbResultAdapter {
     {
         // TODO: Implement getAffectedRows() method.
     }
+
 }
