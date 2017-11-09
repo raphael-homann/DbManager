@@ -9,17 +9,21 @@
 namespace Efrogg\Db\Tools;
 
 
+use Efrogg\Db\Query\QueryParameter;
+use Efrogg\Db\Query\RawQueryParameter;
+
 class DbTools
 {
-    public static function parseValuesToWhere($conditions,$use_secure = true)
+    public static function parseValuesToWhere($conditions,$use_secure = true,$prefixe='')
     {
         if(empty($conditions)) {
             return "1";
         } else {
-            return implode(' AND ',array_map(function($key,$value) use($use_secure) {
-                if(is_null($value)) return "$key IS NULL";
-                if(is_array($value)) return "$key = ".implode(" ",$value);
-                if($use_secure) return "$key = ".self::protegeParam($value);
+            return implode(' AND ',array_map(function($key,$value) use($use_secure,$prefixe) {
+                if($value instanceof QueryParameter) return "$prefixe".$value->getQueryString();
+                if(is_null($value)) return "$prefixe$key IS NULL";
+                if(is_array($value)) return "$prefixe$key = ".implode(" ",$value);
+                if($use_secure) return "$prefixe$key = ".self::protegeParam($value);
                 throw new \Exception("unprotected parameter");
 //                return "$key = '".self::escape($value)."'"; // todo : remplacer ça !!
             },array_keys($conditions),array_values($conditions)));
