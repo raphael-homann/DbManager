@@ -73,4 +73,9 @@ class MysqliDbAdapter extends AbstractDbAdapter  {
     public function getAffectedRows() {
         return $this -> db->affected_rows;
     }
+
+    public function getDbLink() {
+        return $this->db;
+    }
+
 }
