@@ -77,15 +77,36 @@ class DbTools
         return self::stringtohex($p);
     }
 
+    /**
+     * encode un chaine en hexadécimal
+     * @param $string
+     * @return string
+     */
     public static function stringtohex($string)
     {
         $res=unpack('H*', $string);
         return '0x'.$res[1];
     }
 
+    /**
+     * renvoie le hash limité à un entier 32 bits d'une chaine
+     * @param $str
+     * @return number
+     */
     public static function getHash32($str)
     {
-        return hexdec("0x" . substr(md5($str), 0, 8));
+        return self::hashToInt(md5($str));
+
     }
+
+    /**
+     * réduit un hash (md5) à un entier sur 32 bits
+     * @param $hash
+     * @return number
+     */
+    public static function hashToInt($hash) {
+        return hexdec("0x".substr($hash,0,8));
+    }
+
 
 }
