@@ -69,6 +69,7 @@ class DbTools
     }
 
     public static function protegeParam($p) {
+        if(is_bool($p)) return (int)$p;
         if(is_int($p)) return $p;
         if(is_float($p)) return $p;
         if(is_numeric($p)) return "'$p'"; // sécurité
