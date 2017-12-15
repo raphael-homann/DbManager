@@ -36,6 +36,13 @@ class DbTools
             // découpe entre les paramètres nommés et les non nommés (?)
             $named_parameters = [];
             $parameters = [];
+
+            // tri des paramètres du plus long au plus court, afin de traiter les ecrasements :
+            // ex : on remplace :id_main_title AVANT :id_main
+            uksort($params,function($k,$k2) {
+                return strlen($k2)-strlen($k);
+            });
+
             foreach($params as $key => $parameter_value) {
                 if(is_string($key)) {
                     $named_parameters[$key] = self::protegeParam($parameter_value);
