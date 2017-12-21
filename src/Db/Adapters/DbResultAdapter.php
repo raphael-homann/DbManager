@@ -57,6 +57,11 @@ interface DbResultAdapter {
     public function getErrorMessage();
 
     /**
+     * @return String
+     */
+    public function getErrorQuery();
+
+    /**
      * @return int
      */
     public function getInsertId();

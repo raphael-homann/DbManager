@@ -105,16 +105,18 @@ class MysqliDbResult extends AbstractDbResultAdapter  {
 
             if($this -> resource -> num_rows>0) $this -> resource -> data_seek(0);
         }
-        return $result;    }
+        return $result;
+    }
 
     /**
      * @param $errno
      * @param $error
      */
-    public function setErrorDetail($errno, $error)
+    public function setErrorDetail($errno, $error,$sql)
     {
         $this->error_code = $errno;
         $this->error_message = $error;
+        $this->error_query = $sql;
     }
 
 

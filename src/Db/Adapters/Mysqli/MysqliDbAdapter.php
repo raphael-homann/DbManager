@@ -34,7 +34,7 @@ class MysqliDbAdapter extends AbstractDbAdapter  {
         $result->setInsertId($this->db->insert_id);
 
         if(!$result->isValid()) {
-            $result->setErrorDetail($this->db->errno,$this->db->error);
+            $result->setErrorDetail($this->db->errno,$this->db->error,$sql);
             $this->dispatchError($query,$params,$this->db->error);
             if($this->throws_exceptions ) {
     //            var_dump($result->getErrorMessage(),$result->getErrorCode());

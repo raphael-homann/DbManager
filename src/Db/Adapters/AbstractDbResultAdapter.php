@@ -21,6 +21,13 @@ abstract class AbstractDbResultAdapter implements DbResultAdapter
     protected $query;
 
     /**
+     * requete qui a levé l'erreur
+     * @var
+     */
+    protected $error_query;
+
+
+    /**
      * @param DbAdapter $adapter
      * @return $this
      */
@@ -54,4 +61,22 @@ abstract class AbstractDbResultAdapter implements DbResultAdapter
     {
         $this->query = $query;
     }
+
+
+    /**
+     * @return mixed
+     */
+    public function getErrorQuery()
+    {
+        return $this->error_query;
+    }
+
+    /**
+     * @param mixed $error_query
+     */
+    public function setErrorQuery($error_query)
+    {
+        $this->error_query = $error_query;
+    }
+
 }

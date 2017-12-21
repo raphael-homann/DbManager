@@ -55,6 +55,7 @@ class PdoDbAdapter extends AbstractDbAdapter {
         }
         $this->lastResult = $result;
         $this->lastStmt = $stmt;
+        $result->setErrorQuery($query);
 
         $result->setAdapter($this);
 
