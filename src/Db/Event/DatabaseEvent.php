@@ -20,8 +20,10 @@ class DatabaseEvent extends Event
     }
 
     const ERROR = "ERROR";
-    const QUERY = "ERROR";
+    const QUERY = "QUERY";
 
+    public $hostname;
+    public $time;
     public $query;
     public $error;
     public $parameters;

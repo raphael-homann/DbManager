@@ -47,6 +47,8 @@ abstract class AbstractDbAdapter extends EventDispatcher implements DbAdapter
         $event->query = $queryString;
         $event->parameters = $params;
         $event->error = $error;
+        $event->time = 0;
+        $event->hostname = $this->getName();
         $this->dispatch(DatabaseEvent::ERROR,$event);
     }
 
