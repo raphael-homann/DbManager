@@ -22,7 +22,7 @@ class DbProxy extends AbstractDbAdapter
     public function setAdapter(DbAdapter $adapter)
     {
         $this->dbAdapter = $adapter;
-        $this->throwsExceptions();
+//        $this->throwsExceptions();
     }
 
     /**
