@@ -51,6 +51,7 @@ class DbProxy extends AbstractDbAdapter
 
     public function throwsExceptions($throws = true)
     {
+        parent::throwsExceptions($throws);
         $this->dbAdapter->throwsExceptions($throws);
     }
 
