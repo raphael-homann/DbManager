@@ -26,6 +26,16 @@ interface DbResultAdapter {
     public function fetchObject($class_name = null, array $params = null);
 
     /**
+     * retourne une valeur unique depuis le premier resultat du fetch
+     * ou null si pas de résultat
+     *
+     * @param null $class_name
+     * @param array $params
+     * @return \stdClass
+     */
+    public function fetchValue($column_name);
+
+    /**
     * renvoie tous les résultats sous forme d'un tableau d'objets standards
      * @param string $type
      * @return \array[]

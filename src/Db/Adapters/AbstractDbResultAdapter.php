@@ -21,7 +21,7 @@ abstract class AbstractDbResultAdapter implements DbResultAdapter
     protected $query;
 
     /**
-     * requete qui a levé l'erreur
+     * requete qui a levï¿½ l'erreur
      * @var
      */
     protected $error_query;
@@ -79,4 +79,16 @@ abstract class AbstractDbResultAdapter implements DbResultAdapter
         $this->error_query = $error_query;
     }
 
+    /**
+     * @inheritdoc
+     */
+    public function fetchValue($column_name)
+    {
+        if($this->isValid() && $this->rowCount() > 0) {
+            $fetch = $this->fetch();
+            return $fetch[$column_name];
+        }
+
+        return null;
+    }
 }
