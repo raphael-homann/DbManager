@@ -27,6 +27,9 @@ class MysqliDbAdapter extends AbstractDbAdapter  {
         if($query instanceof DbQueryBuilder) $sql = $query->buildQuery();
         else $sql = DbTools::protegeRequete($query,$params);
 
+        // decoration éventuelle
+        $sql = $this->decorateSql($sql);
+
         // execution de la requete
         $result = new MysqliDbResult($this -> db->query($sql));
 

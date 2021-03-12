@@ -19,6 +19,10 @@ abstract class AbstractDbAdapter extends EventDispatcher implements DbAdapter
     protected $throws_exceptions = false;
 
     protected $name = "database";
+    /**
+     * @var array<callable>
+     */
+    private $sqlDecorators=[];
 
     public function throwsExceptions($throws = true)
     {
@@ -49,7 +53,20 @@ abstract class AbstractDbAdapter extends EventDispatcher implements DbAdapter
         $event->error = $error;
         $event->time = 0;
         $event->hostname = $this->getName();
-        $this->dispatch(DatabaseEvent::ERROR,$event);
+        $this->dispatch(DatabaseEvent::ERROR, $event);
+    }
+
+    public function addSqlDecorator(callable $sqlDecorator)
+    {
+        $this->sqlDecorators[]=$sqlDecorator;
+    }
+
+    public function decorateSql($sql)
+    {
+        foreach ($this->sqlDecorators as $sqlDecorator) {
+            $sql = $sqlDecorator($sql);
+        }
+        return $sql;
     }
 
 }

@@ -40,6 +40,9 @@ class PrestashopDbAdapter extends AbstractDbAdapter{
         if($query instanceof DbQueryBuilder) $sql = $query->buildQuery();
         else $sql = DbTools::protegeRequete($query,$params);
 
+        // decoration éventuelle
+        $sql = $this->decorateSql($sql);
+
         if($this->db instanceof \MySQL) {
             return new MysqlDbResult($this->db -> query($sql));
         } elseif($this->db instanceof \DbPDOCore) {

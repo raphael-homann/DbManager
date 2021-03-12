@@ -42,6 +42,9 @@ class PdoDbAdapter extends AbstractDbAdapter {
     {
         if($query instanceof DbQueryBuilder) $query = $query->buildQuery();
 
+        // decoration éventuelle
+        $query = $this->decorateSql($query);
+
         $stmt = $this->db->prepare($query);
         $stmt->execute($params);
 

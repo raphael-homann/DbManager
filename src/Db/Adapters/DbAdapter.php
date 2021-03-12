@@ -37,5 +37,5 @@ interface DbAdapter extends EventDispatcherInterface{
 
     public function getName();
 
-
+    public function addSqlDecorator(callable $sqlDecorator);
 }
