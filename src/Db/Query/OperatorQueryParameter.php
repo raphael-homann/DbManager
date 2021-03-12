@@ -16,6 +16,13 @@ class OperatorQueryParameter extends QueryParameter
 {
     protected $operator='=';
 
+    /**
+     * OperatorQueryParameter constructor.
+     * @param string $key
+     * @param array<int|string> $value
+     * @param string $operator
+     * @param string $prefix
+     */
     public function __construct($key, $value,$operator='=',$prefix = '')
     {
         $this->operator=$operator;

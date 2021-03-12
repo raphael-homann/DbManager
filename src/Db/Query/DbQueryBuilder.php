@@ -177,8 +177,8 @@ class DbQueryBuilder
      * Build query string from setted data
      *
      * @param bool $insertValues :
-     * si true : insère les valeurs dans la requete, en mode protégé
-     * si false : renvoie ? à la place des valeurs, getWhereValues permettra de récupérer les valeurs
+     * si true : insï¿½re les valeurs dans la requete, en mode protï¿½gï¿½
+     * si false : renvoie ? ï¿½ la place des valeurs, getWhereValues permettra de rï¿½cupï¿½rer les valeurs
      * @return string
      * @throws Exception
      */
@@ -537,8 +537,22 @@ class DbQueryBuilder
 
         if(is_array($value)) {
             // raw
-            if(strtolower($comparisonOperator) == "in") {
-                $this->_where[] = sprintf("%s %s %s (%s)", $booleanOperator, $field, $comparisonOperator, implode(",",$value));
+            if(strtolower($comparisonOperator) === "in") {
+                $this->_where[] = sprintf(
+                    "%s %s %s (%s)",
+                    $booleanOperator,
+                    $field,
+                    $comparisonOperator,
+                    implode(",", $value)
+                );
+            } elseif(strtolower($comparisonOperator) === "between") {
+                $this->_where[] = sprintf(
+                    "%s %s %s %s",
+                    $booleanOperator,
+                    $field,
+                    $comparisonOperator,
+                    implode(" AND ", $value)
+                );
             } else {
                 $this->_where[] = sprintf("%s %s %s %s", $booleanOperator, $field, $comparisonOperator, implode(" ",$value));
             }
@@ -654,8 +668,8 @@ class DbQueryBuilder
     /**
      * Set LIMIT clause
      *
-     * @param      $limitStart
-     * @param null $limitEnd
+     * @param int|null $limitStart
+     * @param int|null $limitEnd
      *
      * @return $this
      */
