@@ -456,8 +456,8 @@ class DbQueryBuilder
     /**
      * Add FROM clause with table name and optional alias
      *
-     * @param      $tableName
-     * @param null $aliasTable
+     * @param string $tableName
+     * @param ?string $aliasTable
      *
      * @return $this
      */

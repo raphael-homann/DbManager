@@ -14,12 +14,13 @@ use Efrogg\Db\Tools\DbTools;
 
 class OperatorQueryParameter extends QueryParameter
 {
+    /** @var string  */
     protected $operator='=';
 
     /**
      * OperatorQueryParameter constructor.
      * @param string $key
-     * @param array<int|string> $value
+     * @param int|string $value
      * @param string $operator
      * @param string $prefix
      */
