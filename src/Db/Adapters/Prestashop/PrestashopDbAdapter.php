@@ -43,12 +43,17 @@ class PrestashopDbAdapter extends AbstractDbAdapter{
         // decoration éventuelle
         $sql = $this->decorateSql($sql);
 
-        if($this->db instanceof \MySQL) {
-            return new MysqlDbResult($this->db -> query($sql));
-        } elseif($this->db instanceof \DbPDOCore) {
-            return new PdoDbResult($this->db -> query($sql));
+        if ($this->db instanceof \MySQL) {
+            return new MysqlDbResult($this->db->query($sql));
+        } elseif ($this->db instanceof \DbPDOCore) {
+            $pdoStatement = $this->db->query($sql);
+            if ($pdoStatement instanceof \PDOStatement) {
+                return new PdoDbResult($pdoStatement);
+            } else {
+                throw new \Exception("SQL error : " . $this->db->getNumberError() . ' - ' . $this->db->getMsgError());
+            }
         } else {
-            throw new \Exception("datapase type unknown : ".get_class($this->db));
+            throw new \Exception("datapase type unknown : " . get_class($this->db));
         }
     }
 
